@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chief of Staff
+
+A personal Chief of Staff web application to help manage your work life.
+
+## Features
+
+### Current
+- **Product Jam Calendar View**: View upcoming Product Jam meetings segmented by calendar week for the next 6 weeks
+
+### Planned
+- Slack integration
+- Email summaries
+- Task management
+- More calendar views and filters
+
+## Tech Stack
+
+- **Next.js** - React framework with server-side rendering
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Google Calendar API** - Calendar integration
+- **Slack API** - (Coming soon) Slack integration
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Set up your environment variables by copying `.env.local.example` to `.env.local` and filling in your credentials.
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with the following variables:
 
-## Learn More
+```
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+chief-of-staff/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── calendar/      # Calendar-related endpoints
+│   ├── calendar/          # Calendar views
+│   └── page.tsx           # Home page
+├── components/            # React components
+├── lib/                   # Utility functions and API clients
+└── types/                 # TypeScript type definitions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development Roadmap
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [x] Initialize project
+- [ ] Set up Google Calendar authentication
+- [ ] Implement Product Jam weekly view
+- [ ] Add filtering capabilities
+- [ ] Integrate Slack API
+- [ ] Add more Chief of Staff features
