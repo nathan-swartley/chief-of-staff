@@ -1,6 +1,7 @@
 "use client"
 
 import { CalendarEvent } from "@/lib/google-calendar"
+import { useState } from "react"
 
 interface WeeklyCalendarViewProps {
   data: Array<{
@@ -10,6 +11,8 @@ interface WeeklyCalendarViewProps {
 }
 
 export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
+  const [copiedWeek, setCopiedWeek] = useState<string | null>(null)
+
   const formatEventTime = (event: CalendarEvent) => {
     if (event.start.dateTime) {
       const date = new Date(event.start.dateTime)
@@ -20,6 +23,20 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
       })
     }
     return event.start.date || ""
+  }
+
+  const copyWeekToClipboard = async (week: string, events: CalendarEvent[]) => {
+    const text = events
+      .map((event) => `• ${event.summary} - ${formatEventTime(event)}`)
+      .join("\n")
+
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedWeek(week)
+      setTimeout(() => setCopiedWeek(null), 2000)
+    } catch (err) {
+      console.error("Failed to copy:", err)
+    }
   }
 
   return (
@@ -33,70 +50,53 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
             border: '2px solid var(--border)'
           }}
         >
-          <h3 className="text-base font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
-            {week}
-          </h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
+              {week}
+            </h3>
+            {events.length > 0 && (
+              <button
+                onClick={() => copyWeekToClipboard(week, events)}
+                className="p-2 rounded-lg transition-all hover:scale-105"
+                style={{
+                  background: copiedWeek === week ? 'var(--accent-purple)' : 'var(--interactive-bg)',
+                  color: copiedWeek === week ? 'var(--background)' : 'var(--interactive-text)'
+                }}
+                title={copiedWeek === week ? "Copied!" : "Copy to clipboard"}
+              >
+                {copiedWeek === week ? (
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
+              </button>
+            )}
+          </div>
           {events.length === 0 ? (
             <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
               No Product Jams this week
             </p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2">
               {events.map((event) => (
-                <a
+                <div
                   key={event.id}
-                  href={event.htmlLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-lg p-4 transition-all hover:scale-[1.01]"
-                  style={{
-                    background: 'var(--interactive-bg)',
-                    border: '2px solid var(--border)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--accent-purple)'
-                    e.currentTarget.style.background = 'var(--interactive-hover)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border)'
-                    e.currentTarget.style.background = 'var(--interactive-bg)'
-                  }}
+                  className="flex items-center justify-between gap-3 py-1.5"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold mb-1 truncate" style={{ color: 'var(--interactive-text)' }}>
-                        {event.summary}
-                      </h4>
-                      <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-quaternary)' }}>
-                        <svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{formatEventTime(event)}</span>
-                      </div>
-                      {event.location && (
-                        <div className="flex items-center gap-2 mt-1 text-sm" style={{ color: 'var(--text-quaternary)' }}>
-                          <svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="truncate">{event.location}</span>
-                        </div>
-                      )}
-                    </div>
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 transition-all group-hover:translate-x-0.5"
-                      style={{ color: 'var(--accent-purple)' }}
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </div>
-                </a>
+                  <a
+                    href={event.htmlLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-sm hover:underline"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
+                    {event.summary} - {formatEventTime(event)}
+                  </a>
+                </div>
               ))}
             </div>
           )}
