@@ -82,15 +82,6 @@ export default async function ProductJamsPage() {
 
       {/* Main Content */}
       <main className="mx-auto max-w-5xl px-6 py-12 lg:px-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-            Next 6 Weeks
-          </h2>
-          <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-            Your upcoming Product Jam meetings (excluding Enrollment)
-          </p>
-        </div>
-
         <WeeklyCalendarView data={data} />
       </main>
     </div>
