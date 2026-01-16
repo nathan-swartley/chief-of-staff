@@ -68,10 +68,10 @@ export default async function ProductJamsPage() {
                 {session.user?.name}
               </span>
               <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{
-                background: 'var(--surface-elevated)',
-                border: '1px solid var(--border)'
+                background: 'var(--interactive-bg)',
+                color: 'var(--interactive-text)'
               }}>
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                <span className="text-sm font-semibold">
                   {session.user?.name?.charAt(0).toUpperCase()}
                 </span>
               </div>

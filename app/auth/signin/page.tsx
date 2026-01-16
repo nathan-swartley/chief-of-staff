@@ -7,7 +7,7 @@ export default function SignIn() {
     <div className="flex min-h-screen items-center justify-center" style={{ background: 'var(--background)' }}>
       <div className="w-full max-w-md space-y-8 rounded-2xl p-8" style={{
         background: 'var(--surface)',
-        border: '1px solid var(--border-subtle)'
+        border: '1px solid var(--border)'
       }}>
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight" style={{
@@ -26,12 +26,13 @@ export default function SignIn() {
         <div className="mt-10">
           <button
             onClick={() => signIn("google", { callbackUrl: "/" })}
-            className="flex w-full items-center justify-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-all hover:scale-[1.02]"
+            className="flex w-full items-center justify-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all hover:scale-[1.02]"
             style={{
-              background: 'var(--surface-elevated)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-primary)'
+              background: 'var(--interactive-bg)',
+              color: 'var(--interactive-text)'
             }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--interactive-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'var(--interactive-bg)'}
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path

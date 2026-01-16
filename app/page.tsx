@@ -13,7 +13,7 @@ export default async function Home() {
     <div className="min-h-screen" style={{ background: 'var(--background)' }}>
       {/* Navigation */}
       <nav style={{
-        borderBottom: '1px solid var(--border-subtle)',
+        borderBottom: '1px solid var(--border)',
         background: 'var(--background)'
       }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -31,10 +31,10 @@ export default async function Home() {
                 {session.user?.name}
               </span>
               <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{
-                background: 'var(--surface-elevated)',
-                border: '1px solid var(--border)'
+                background: 'var(--interactive-bg)',
+                color: 'var(--interactive-text)'
               }}>
-                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                <span className="text-sm font-semibold">
                   {session.user?.name?.charAt(0).toUpperCase()}
                 </span>
               </div>
@@ -61,24 +61,32 @@ export default async function Home() {
             className="group block rounded-xl p-6 transition-all hover:scale-[1.02]"
             style={{
               background: 'var(--surface)',
-              border: '1px solid var(--border-subtle)'
+              border: '2px solid var(--border)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'var(--interactive-bg)'
+              e.currentTarget.style.background = 'var(--surface-elevated)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--border)'
+              e.currentTarget.style.background = 'var(--surface)'
             }}
           >
             <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg" style={{
-              background: 'var(--surface-elevated)',
-              border: '1px solid var(--border)'
+              background: 'var(--interactive-bg)',
+              color: 'var(--accent-purple)'
             }}>
-              <svg className="h-6 w-6" style={{ color: 'var(--accent-purple)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
               Product Jams
             </h3>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
               View your Product Jam meetings for the next 6 weeks
             </p>
-            <div className="mt-4 flex items-center text-sm font-medium" style={{ color: 'var(--accent-purple)' }}>
+            <div className="flex items-center text-sm font-medium" style={{ color: 'var(--accent-purple)' }}>
               Open
               <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -86,15 +94,15 @@ export default async function Home() {
             </div>
           </Link>
 
-          <div className="rounded-xl p-6 opacity-50" style={{
+          <div className="rounded-xl p-6 opacity-40" style={{
             background: 'var(--surface)',
-            border: '1px solid var(--border-subtle)'
+            border: '2px solid var(--border)'
           }}>
             <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg" style={{
               background: 'var(--surface-elevated)',
-              border: '1px solid var(--border)'
+              color: 'var(--accent-blue)'
             }}>
-              <svg className="h-6 w-6" style={{ color: 'var(--accent-blue)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
@@ -106,15 +114,15 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="rounded-xl p-6 opacity-50" style={{
+          <div className="rounded-xl p-6 opacity-40" style={{
             background: 'var(--surface)',
-            border: '1px solid var(--border-subtle)'
+            border: '2px solid var(--border)'
           }}>
             <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg" style={{
               background: 'var(--surface-elevated)',
-              border: '1px solid var(--border)'
+              color: 'var(--accent-green)'
             }}>
-              <svg className="h-6 w-6" style={{ color: 'var(--accent-green)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
             </div>
