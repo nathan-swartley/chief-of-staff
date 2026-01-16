@@ -2,15 +2,17 @@
 
 import { CalendarEvent } from "@/lib/google-calendar"
 import { useState } from "react"
+import SlackPostButton from "./slack-post-button"
 
 interface WeeklyCalendarViewProps {
   data: Array<{
     week: string
     events: CalendarEvent[]
   }>
+  webhookConfigured?: boolean
 }
 
-export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
+export default function WeeklyCalendarView({ data, webhookConfigured = false }: WeeklyCalendarViewProps) {
   const [copied, setCopied] = useState(false)
 
   const formatEventTime = (event: CalendarEvent) => {
@@ -59,25 +61,28 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
         <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
           Product Jams in the next 6 weeks
         </h3>
-        <button
-          onClick={copyAllToClipboard}
-          className="p-2 rounded-lg transition-all hover:scale-105"
-          style={{
-            background: copied ? 'var(--accent-purple)' : 'var(--interactive-bg)',
-            color: copied ? 'var(--background)' : 'var(--interactive-text)'
-          }}
-          title={copied ? "Copied!" : "Copy all to clipboard"}
-        >
-          {copied ? (
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          ) : (
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <SlackPostButton data={data} webhookConfigured={webhookConfigured} />
+          <button
+            onClick={copyAllToClipboard}
+            className="p-2 rounded-lg transition-all hover:scale-105"
+            style={{
+              background: copied ? 'var(--accent-purple)' : 'var(--interactive-bg)',
+              color: copied ? 'var(--background)' : 'var(--interactive-text)'
+            }}
+            title={copied ? "Copied!" : "Copy all to clipboard"}
+          >
+            {copied ? (
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       <div className="space-y-3">
