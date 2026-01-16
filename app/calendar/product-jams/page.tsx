@@ -39,33 +39,54 @@ export default async function ProductJamsPage() {
   }))
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 justify-between">
+    <div className="min-h-screen" style={{ background: 'var(--background)' }}>
+      {/* Navigation */}
+      <nav style={{
+        borderBottom: '1px solid var(--border-subtle)',
+        background: 'var(--background)'
+      }}>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-gray-600 hover:text-gray-900">
-                ← Back
+              <Link
+                href="/"
+                className="flex items-center gap-2 text-sm transition-colors"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">
+              <div className="h-6" style={{ borderLeft: '1px solid var(--border-subtle)' }}></div>
+              <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Product Jams
               </h1>
             </div>
-            <div className="flex items-center">
-              <span className="text-sm text-gray-700">
+            <div className="flex items-center gap-3">
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                 {session.user?.name}
               </span>
+              <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{
+                background: 'var(--surface-elevated)',
+                border: '1px solid var(--border)'
+              }}>
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                  {session.user?.name?.charAt(0).toUpperCase()}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+      {/* Main Content */}
+      <main className="mx-auto max-w-5xl px-6 py-12 lg:px-8">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
             Next 6 Weeks
           </h2>
-          <p className="mt-1 text-sm text-gray-600">
+          <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
             Your upcoming Product Jam meetings (excluding Enrollment)
           </p>
         </div>

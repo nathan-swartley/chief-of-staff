@@ -4,21 +4,34 @@ import { signIn } from "next-auth/react"
 
 export default function SignIn() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg">
+    <div className="flex min-h-screen items-center justify-center" style={{ background: 'var(--background)' }}>
+      <div className="w-full max-w-md space-y-8 rounded-2xl p-8" style={{
+        background: 'var(--surface)',
+        border: '1px solid var(--border-subtle)'
+      }}>
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="text-3xl font-bold tracking-tight" style={{
+            background: 'var(--gradient-primary)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Chief of Staff
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
             Your personal assistant to manage your work life
           </p>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-10">
           <button
             onClick={() => signIn("google", { callbackUrl: "/" })}
-            className="flex w-full items-center justify-center gap-3 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+            className="flex w-full items-center justify-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-all hover:scale-[1.02]"
+            style={{
+              background: 'var(--surface-elevated)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-primary)'
+            }}
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
@@ -42,7 +55,7 @@ export default function SignIn() {
           </button>
         </div>
 
-        <div className="mt-6 text-center text-xs text-gray-500">
+        <div className="mt-6 text-center text-xs" style={{ color: 'var(--text-tertiary)' }}>
           By signing in, you agree to allow access to your Google Calendar
         </div>
       </div>
