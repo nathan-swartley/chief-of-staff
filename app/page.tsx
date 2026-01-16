@@ -70,18 +70,10 @@ export default async function Home() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <Link
             href="/calendar/product-jams"
-            className="group block rounded-xl p-6 transition-all hover:scale-[1.02]"
+            className="group block rounded-xl p-6 transition-all hover:scale-[1.02] hover:border-[var(--interactive-bg)] hover:bg-[var(--surface-elevated)]"
             style={{
               background: 'var(--surface)',
               border: '2px solid var(--border)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--interactive-bg)'
-              e.currentTarget.style.background = 'var(--surface-elevated)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border)'
-              e.currentTarget.style.background = 'var(--surface)'
             }}
           >
             <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg" style={{
@@ -108,18 +100,10 @@ export default async function Home() {
 
           <Link
             href="/settings"
-            className="group block rounded-xl p-6 transition-all hover:scale-[1.02]"
+            className="group block rounded-xl p-6 transition-all hover:scale-[1.02] hover:border-[var(--interactive-bg)] hover:bg-[var(--surface-elevated)]"
             style={{
               background: 'var(--surface)',
               border: '2px solid var(--border)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--interactive-bg)'
-              e.currentTarget.style.background = 'var(--surface-elevated)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border)'
-              e.currentTarget.style.background = 'var(--surface)'
             }}
           >
             <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg" style={{
