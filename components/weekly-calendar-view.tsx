@@ -55,7 +55,7 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
         border: '2px solid var(--border)'
       }}
     >
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
           Next 6 Weeks
         </h3>
@@ -80,20 +80,21 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
         </button>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-3">
         {data.map(({ week, events }) => (
           <div key={week}>
-            <h4 className="text-sm font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            <h4 className="text-sm font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
               {week}
             </h4>
             {events.length === 0 ? (
-              <p className="text-sm mb-2" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
                 No Product Jams this week
               </p>
             ) : (
-              <div className="space-y-1.5 mb-2">
+              <div className="space-y-0.5">
                 {events.map((event) => (
-                  <div key={event.id} className="py-1">
+                  <div key={event.id} className="flex items-start gap-2">
+                    <span style={{ color: 'var(--text-primary)' }}>•</span>
                     <a
                       href={event.htmlLink}
                       target="_blank"
