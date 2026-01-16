@@ -2,27 +2,41 @@ import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import WeeklyCalendarView from "@/components/weekly-calendar-view"
-
-async function getProductJams() {
-  const response = await fetch("http://localhost:3000/api/calendar/product-jams", {
-    cache: "no-store",
-  })
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch Product Jams")
-  }
-
-  return response.json()
-}
+import { getCalendarEvents, groupEventsByWeek } from "@/lib/google-calendar"
 
 export default async function ProductJamsPage() {
   const session = await auth()
 
-  if (!session) {
+  if (!session?.accessToken) {
     redirect("/auth/signin")
   }
 
-  const data = await getProductJams()
+  // Get events for the next 6 weeks
+  const now = new Date()
+  const sixWeeksFromNow = new Date()
+  sixWeeksFromNow.setDate(now.getDate() + 42)
+
+  const events = await getCalendarEvents(
+    session.accessToken,
+    "primary",
+    "Product Jam",
+    now.toISOString(),
+    sixWeeksFromNow.toISOString()
+  )
+
+  // Filter out Enrollment events
+  const filteredEvents = events.filter(
+    (event) => !event.summary.includes("Enrollment")
+  )
+
+  // Group by week
+  const eventsByWeek = groupEventsByWeek(filteredEvents, 6)
+
+  // Convert Map to array for component
+  const data = Array.from(eventsByWeek.entries()).map(([week, events]) => ({
+    week,
+    events,
+  }))
 
   return (
     <div className="min-h-screen bg-gray-50">
