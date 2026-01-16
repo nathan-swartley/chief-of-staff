@@ -57,7 +57,7 @@ export default function WeeklyCalendarView({ data }: WeeklyCalendarViewProps) {
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
-          Next 6 Weeks
+          Product Jams in the next 6 weeks
         </h3>
         <button
           onClick={copyAllToClipboard}
